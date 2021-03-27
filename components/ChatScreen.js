@@ -40,8 +40,9 @@ function ChatScreen({chat, messages, recipientSnapshot, recipient}) {
 
     const showMessages = () => {
         if(messagesSnapshot){
-            return messagesSnapshot.docs.map(msg => (
-                <Message  
+            return messagesSnapshot.docs.map(msg => {
+                scrollToBottom()
+                return <Message  
                     key={msg.id} 
                     user={msg.data().user}
                     message={{
@@ -49,17 +50,19 @@ function ChatScreen({chat, messages, recipientSnapshot, recipient}) {
                         timestamp: msg.data().timestamp?.toDate().getTime()
                     }}
                 />
-            ))
+            })
         } else {
-            return JSON.parse(messages).map(msg => (
-                <Message  
+            
+            return JSON.parse(messages).map(msg => {
+                scrollToBottom()
+                return <Message  
                     key={msg.id} 
                     user={msg.user}
                     message={msg}
                 />
-            ))
+            })
         }
-        scrollToBottom()
+        
     }
 
     const sendMessage = (e) => {
