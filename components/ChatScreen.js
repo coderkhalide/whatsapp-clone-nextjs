@@ -24,10 +24,12 @@ function ChatScreen({chat, messages, recipientSnapshot, recipient}) {
     const endOfMessageRef = useRef(null)
 
     const scrollToBottom = () => {
-        endOfMessageRef.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        })
+        if(endOfMessageRef.current){
+            endOfMessageRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+        }
     }
 
     const [messagesSnapshot] = useCollection(
